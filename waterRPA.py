@@ -1,8 +1,24 @@
+#coding=utf-8
 import pyautogui
 import time
 import xlrd
 import pyperclip
 
+# 子进程清理临时文件
+
+# 参考链接 https://www.cnblogs.com/pathbreaker/articles/13260552.html
+
+import subprocess
+
+def clear_bat():
+    p = subprocess.Popen("cmd.exe /c" + "clear.bat", stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    curline = p.stdout.readline()
+    while (curline != b''):
+        print(curline)
+        curline = p.stdout.readline()
+    p.wait()
+    print(p.returncode)
+    
 #定义鼠标事件
 
 #pyautogui库其他用法 https://blog.csdn.net/qingfengxd1/article/details/108270159
@@ -159,3 +175,4 @@ if __name__ == '__main__':
                 print("等待0.1秒")    
     else:
         print('输入有误或者已经退出!')
+    clear_bat()
